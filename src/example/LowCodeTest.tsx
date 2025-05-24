@@ -41,7 +41,7 @@ export class FuncComVsClassCOm extends React.Component {
     render(): React.ReactNode {
         return (
             <>
-                <input />d
+                <input />
                 <FuncCom count={this.state.count} updateCount={this.updateCount} />
                 <ClassCom count={this.state.count} updateCount={this.updateCount} />
             </>

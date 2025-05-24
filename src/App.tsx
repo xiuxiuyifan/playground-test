@@ -1,44 +1,52 @@
 import { useRef, useState } from 'react'
-import './App.css'
-import { transform } from '@babel/standalone'
+import BabelTransform from './example/BabelTransform'
+import BabelStandalone from './example/babel-standalone.tsx'
+import MonacoEditor from './example/MonacoEditor.tsx'
+import { FuncComVsClassCOm } from './example/LowCodeTest.tsx'
+import DispatchDemo from './example/DispatchDemo.tsx'
+import TimerView from './example/MobxStudy.tsx'
+import { makeAutoObservable } from 'mobx'
+import ToDoList from './example/MobxTodolist.tsx'
 
 function App() {
-  const textareaRef = useRef<HTMLTextAreaElement>(null)
+  const [counter] = useState({ step: 4 })
 
-  function onClick() {
-    if (!textareaRef.current) {
-      return
-    }
-    const res = transform(textareaRef.current.value, {
-      presets: ['react', 'typescript'],
-      filename: 'guang.tsx'
+  // Model the application state.
+
+  function createTimer() {
+    return makeAutoObservable({
+      secondsPassed: 0,
+      increase() {
+        this.secondsPassed += 1
+      },
+      reset() {
+        this.secondsPassed = 0
+      }
     })
-    console.log(res.code)
   }
 
-  const code = `import { useEffect, useState } from "react";
+  const myTimer = createTimer()
 
-  function App() {
-    const [num, setNum] = useState(() => {
-      const num1 = 1 + 2;
-      const num2 = 2 + 3;
-      return num1 + num2
-    });
-  
-    return (
-      <div onClick={() => setNum((prevNum) => prevNum + 1)}>{num}</div>
-    );
-  }
-  
-  export default App;
-  `
+  // Update the 'Seconds passed: X' text every second.
+  setInterval(() => {
+    myTimer.increase()
+  }, 1000)
 
   return (
     <>
-      <div>
-        <textarea ref={textareaRef} style={{ width: '500px', height: '300px' }} defaultValue={code}></textarea>
-        <button onClick={onClick}>编译</button>
-      </div>
+      {/* babel 转换源代码 */}
+      {/* <BabelTransform /> */}
+
+      {/* <BabelStandalone /> */}
+
+      {/* <MonacoEditor /> */}
+
+      {/* <FuncComVsClassCOm /> */}
+
+      {/* <DispatchDemo step={counter.step} /> */}
+
+      {/* <TimerView timer={myTimer} /> */}
+
     </>
   )
 }
