@@ -13,6 +13,17 @@
             }
             export { add };
             `;
+
+        const url = URL.createObjectURL(new Blob([code1], {type: 'application/javascript'}))
+        const code2 = `import {add} from "${url}"
+            console.log(add(2, 3));
+        `
+
+        const script = document.createElement('script')
+        script.type = 'module'
+        script.textContent = code2
+        document.body.appendChild(script)
+        
     </script>
 </body>
 </html>
