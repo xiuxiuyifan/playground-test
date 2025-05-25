@@ -44,7 +44,7 @@ class ToDoList {
 
     constructor() {
         makeObservable(this, {
-            searchStatus: observable,
+            searchStatus: observable,   // observable 也可以单独使用，返回一个 proxy 的包装   
             list: observable,
             displayList: computed,
             changeStatus: action,

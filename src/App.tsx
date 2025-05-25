@@ -4,9 +4,10 @@ import BabelStandalone from './example/babel-standalone.tsx'
 import MonacoEditor from './example/MonacoEditor.tsx'
 import { FuncComVsClassCOm } from './example/LowCodeTest.tsx'
 import DispatchDemo from './example/DispatchDemo.tsx'
-import TimerView from './example/MobxStudy.tsx'
+import TimerView from './example/mobx/MobxStudy.tsx'
 import { makeAutoObservable } from 'mobx'
-import ToDoList from './example/MobxTodolist.tsx'
+// import ToDoList from './example/mobx/MobxTodolist.tsx'
+import './example/mobx/MobxRunInAction.tsx'
 
 function App() {
   const [counter] = useState({ step: 4 })
@@ -46,6 +47,8 @@ function App() {
       {/* <DispatchDemo step={counter.step} /> */}
 
       {/* <TimerView timer={myTimer} /> */}
+
+
 
     </>
   )
