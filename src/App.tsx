@@ -6,8 +6,9 @@ import { FuncComVsClassCOm } from './example/LowCodeTest.tsx'
 import DispatchDemo from './example/DispatchDemo.tsx'
 import TimerView from './example/mobx/MobxStudy.tsx'
 import { makeAutoObservable } from 'mobx'
+import Preview from './example/Preview.tsx'
 // import ToDoList from './example/mobx/MobxTodolist.tsx'
-import './example/mobx/MobxRunInAction.tsx'
+// import './example/mobx/MobxRunInAction.tsx'
 
 function App() {
   const [counter] = useState({ step: 4 })
@@ -48,6 +49,7 @@ function App() {
 
       {/* <TimerView timer={myTimer} /> */}
 
+      <Preview />
 
 
     </>
