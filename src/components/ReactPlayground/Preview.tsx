@@ -1,7 +1,7 @@
 import type React from "react";
 
 // 引入 html 文件原始的内容，不进行解析
-import iframeRaw from './iframe.html?raw'
+import iframeRaw from '../../example/iframe.html?raw'
 
 // 用 URL.createObjectURL + Blob 生成 blob url 设置到 iframe 的 src 就好了：
 

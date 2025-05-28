@@ -1,12 +1,12 @@
 import { useRef, useState } from 'react'
 import BabelTransform from './example/BabelTransform'
 import BabelStandalone from './example/babel-standalone.tsx'
-import MonacoEditor from './example/MonacoEditor.tsx'
 import { FuncComVsClassCOm } from './example/LowCodeTest.tsx'
 import DispatchDemo from './example/DispatchDemo.tsx'
 import TimerView from './example/mobx/MobxStudy.tsx'
 import { makeAutoObservable } from 'mobx'
-import Preview from './example/Preview.tsx'
+import Preview from './components/ReactPlayground/Preview.tsx'
+import ReactPlayground from './components/ReactPlayground/index.tsx'
 // import ToDoList from './example/mobx/MobxTodolist.tsx'
 // import './example/mobx/MobxRunInAction.tsx'
 
@@ -49,9 +49,9 @@ function App() {
 
       {/* <TimerView timer={myTimer} /> */}
 
-      <Preview />
+      {/* <Preview /> */}
 
-
+      <ReactPlayground />
     </>
   )
 }
