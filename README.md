@@ -82,3 +82,12 @@ PlaygroundProvider  组件把自己自身内部的数据提供出去、
 
 
 在编辑器中展示 file 中当前选中的那一个
+
+
+
+### 通过 babel 插件来处理 import 语句，转换成 blob url 的方式。
+
+
+
+分别对 css、json 还有 tsx、ts 等后缀名的 import 做下替换：
+

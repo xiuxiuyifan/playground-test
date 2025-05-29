@@ -10,7 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@babel/standalone": "^7.27.2",
+    "@babel/standalone": "^7.27.3",
     "@monaco-editor/react": "^4.7.0",
     "@typescript/ata": "^0.9.8",
     "allotment": "^1.20.3",
