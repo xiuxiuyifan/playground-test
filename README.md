@@ -1,54 +1,84 @@
-# React + TypeScript + Vite
+## 安装包
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+将当前脚手架安装为全局的命令
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```
+npm install -g .
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+再就是 esModuleInterop，这个也是 ts 常用配置。
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+默认 fs 要这么引入，因为它是 commonjs 的包，没有 default 属性：
+
+```javascript
+import * as fs from 'fs';
 ```
+设置 esModuleInterop 会在编译的时候自动加上 default 属性。
+
+就可以这样引入了：
+
+```javascript
+import fs from 'fs';
+```
+
+## editor actions
+
+```
+let actions = editor.getSupportedActions().map((a) => a.id);
+    console.log(actions);
+```
+
+
+## 下载第三方包d.ts 声明文件
+
+```
+export function createATA(onDownloadFile: (code: string, path: string) => void) {
+    const ata = setupTypeAcquisition({
+        projectName: 'my-ata',
+        typescript: typescriprt,
+        logger: console,
+        delegate: {
+            receivedFile: (code, path) => {
+                console.log('自动下载的包', path);
+                onDownloadFile(code, path);
+            }
+        },
+    })
+
+    return ata;
+}
+```
+
+
+
+## context 数据结构
+
+```
+{
+  "App.vue": {
+    name: 'App.vue',
+    value: '代码内容',
+    language: 'vue'
+  },
+  "Comp.vue": {
+    name: 'Comp.vue',
+    value: '代码内容',
+    language: 'vue'
+  }
+}
+```
+
+PlaygroundProvider  组件把自己自身内部的数据提供出去、
+
+
+```
+<PlaygroundProvider>
+  <ReactPlayground />
+</PlaygroundProvider>
+```
+
+这样就可以在任意组件用 useContext 读取 context 的值了。
+
+
+在编辑器中展示 file 中当前选中的那一个

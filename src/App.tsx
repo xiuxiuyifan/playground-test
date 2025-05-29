@@ -7,6 +7,7 @@ import TimerView from './example/mobx/MobxStudy.tsx'
 import { makeAutoObservable } from 'mobx'
 import Preview from './components/ReactPlayground/Preview.tsx'
 import ReactPlayground from './components/ReactPlayground/index.tsx'
+import { PlaygroundProvider } from './components/ReactPlayground/PlaygroundContext.tsx'
 // import ToDoList from './example/mobx/MobxTodolist.tsx'
 // import './example/mobx/MobxRunInAction.tsx'
 
@@ -50,8 +51,9 @@ function App() {
       {/* <TimerView timer={myTimer} /> */}
 
       {/* <Preview /> */}
-
-      <ReactPlayground />
+      <PlaygroundProvider>
+        <ReactPlayground />
+      </PlaygroundProvider>
     </>
   )
 }
