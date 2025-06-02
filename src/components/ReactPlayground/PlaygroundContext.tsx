@@ -81,7 +81,7 @@ export const PlaygroundProvider = (props: PropsWithChildren) => {
                 selectedFileName,
                 setFiles,
                 addFile,
-                removeFile,
+                removeFile, 
                 updateFileName,
                 setSelectedFileName
             }}

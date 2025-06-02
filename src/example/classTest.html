@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    class Demo {
+  constructor() {
+    this.name = "Demo";
+  }
+
+  test() {
+    console.log('test method');
+    this.say(); // 调用子类的方法
+  }
+}
+
+class Child extends Demo {
+  constructor() {
+    super(); // 调用父类的构造函数
+    this.name = "Child";
+  }
+
+  say() {
+    console.log('say');
+  }
+}
+
+var c = new Child();
+c.test(); // 输出: test method, say
+
+  </script>
+</body>
+</html>
