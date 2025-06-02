@@ -1,7 +1,12 @@
 // 多个组件 共享一份数据、fileNamelist Editor preview
 
-import { createContext, useState, type PropsWithChildren } from "react";
-import { fileName2Language } from "../../utils";
+import {
+  createContext,
+  useEffect,
+  useState,
+  type PropsWithChildren,
+} from "react";
+import { compress, fileName2Language, unCompress } from "../../utils";
 import { initFiles } from "./files";
 
 export interface File {
@@ -35,10 +40,22 @@ export const PlaygroundContext = createContext<PlaygroundContext>({
   selectedFileName: "App.tsx",
 } as PlaygroundContext);
 
+const getFilesFromUrl = () => {
+  let files: Files | undefined;
+
+  try {
+    const hash = unCompress(decodeURIComponent(window.location.hash.slice(1)));
+    files = JSON.parse(hash);
+  } catch (error) {
+    console.error(error);
+  }
+  return files;
+};
+
 export const PlaygroundProvider = (props: PropsWithChildren) => {
   const { children } = props;
   // 存放当前编辑器产生的文件，在内存中
-  const [files, setFiles] = useState<Files>(initFiles);
+  const [files, setFiles] = useState<Files>(getFilesFromUrl() || initFiles);
   // 当前选中文件名
   const [selectedFileName, setSelectedFileName] = useState("App.tsx");
 
@@ -80,6 +97,11 @@ export const PlaygroundProvider = (props: PropsWithChildren) => {
       ...newFile,
     });
   };
+
+  useEffect(() => {
+    const hash = compress(JSON.stringify(files));
+    window.location.hash = encodeURIComponent(hash);
+  }, [files]);
 
   return (
     <PlaygroundContext.Provider
