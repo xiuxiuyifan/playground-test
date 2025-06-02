@@ -3,7 +3,11 @@ import { PlaygroundContext } from "./PlaygroundContext";
 import { FileNameItem } from "./FileNameItem";
 
 import styles from "./FileNameItem.module.scss";
-import { ENTRY_FILE_NAME } from "./files";
+import {
+  APP_COMPONENT_FILE_NAME,
+  ENTRY_FILE_NAME,
+  IMPORT_MAP_FILE_NAME,
+} from "./files";
 
 export default function FileNameList() {
   const {
@@ -40,6 +44,13 @@ export default function FileNameList() {
     removeFile(name);
     setSelectedFileName(ENTRY_FILE_NAME);
   };
+
+  const readonlyFileNames = [
+    ENTRY_FILE_NAME,
+    IMPORT_MAP_FILE_NAME,
+    APP_COMPONENT_FILE_NAME,
+  ];
+
   return (
     <div className={styles.tabs}>
       {tabs.map((item, index, arr) => (
@@ -48,11 +59,11 @@ export default function FileNameList() {
           key={item + index}
           value={item}
           actived={selectedFileName === item}
+          readonly={readonlyFileNames.includes(item)}
           onClick={() => setSelectedFileName(item)} // 设置当前选中的那个文件
           onEditComplete={(name: string) => handleEditComplete(name, item)}
           creating={creating && index === arr.length - 1}
-          onRemove={(e) => {
-            e.stopPropagation();
+          onRemove={() => {
             handleRemove(item);
           }}
         ></FileNameItem>

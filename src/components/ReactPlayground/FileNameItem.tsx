@@ -4,20 +4,23 @@ import type React from "react";
 import styles from "./FileNameItem.module.scss";
 
 import { useEffect, useRef, useState, type MouseEventHandler } from "react";
+import { Popconfirm } from "antd";
 
 export interface FileNameItemProps {
   value: string;
   actived: boolean;
   creating: boolean;
+  readonly: boolean;
   onClick: () => void;
   onEditComplete: (value: string) => void;
-  onRemove: MouseEventHandler;
+  onRemove: () => void;
 }
 
 export const FileNameItem: React.FC<FileNameItemProps> = (props) => {
   const {
     value,
     actived = false,
+    readonly,
     onClick,
     onEditComplete,
     creating,
@@ -68,12 +71,24 @@ export const FileNameItem: React.FC<FileNameItemProps> = (props) => {
       ) : (
         <>
           <span onDoubleClick={handleDoubleClick}>{name}</span>
-          <span style={{ marginLeft: 5, display: "flex" }} onClick={onRemove}>
-            <svg width="12" height="12" viewBox="0 0 24 24">
-              <line stroke="#999" x1="18" y1="6" x2="6" y2="18"></line>
-              <line stroke="#999" x1="6" y1="6" x2="18" y2="18"></line>
-            </svg>
-          </span>
+          {!readonly ? (
+            <Popconfirm
+              title="确定删除该文件吗？"
+              onConfirm={(e) => {
+                e?.stopPropagation();
+                onRemove();
+              }}
+              okText="确定"
+              cancelText="取消"
+            >
+              <span style={{ marginLeft: 5, display: "flex" }}>
+                <svg width="12" height="12" viewBox="0 0 24 24">
+                  <line stroke="#999" x1="18" y1="6" x2="6" y2="18"></line>
+                  <line stroke="#999" x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+              </span>
+            </Popconfirm>
+          ) : null}
         </>
       )}
     </div>
