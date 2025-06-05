@@ -1,6 +1,7 @@
 import { compile } from "./compiler";
 
 self.addEventListener("message", async ({ data }) => {
+  console.log('compile-data', data)
   try {
     self.postMessage({
       type: "COMPILED_CODE",
